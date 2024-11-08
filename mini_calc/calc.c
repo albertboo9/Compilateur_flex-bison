@@ -1,9 +1,7 @@
-/*fichier calc.c */
 #include <stdio.h>
-#include "calc.tab.h" // 
+#include "calc.tab.h"
 
-int main(void)
-{
+int main(int argc, char **argv) {
     yyparse();
     return 0;
 }
