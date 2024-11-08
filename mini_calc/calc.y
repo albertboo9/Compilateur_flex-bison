@@ -1,18 +1,25 @@
-/* fichier calc.y */
+
 %token NOMBRE /* liste des terminaux */
 %%
-expression: expression ’+’ terme
-| expression ’-’ terme
-| terme
-;
-terme: terme ’*’ facteur
-| terme ’/’ facteur
-| facteur
-;
-facteur: ’(’ expression ’)’
-| ’-’ facteur
-| NOMBRE
-;
+expression: 
+    expression '+' term
+    | expression '-' term
+    | term
+    ;
+term: 
+    term '*' factor
+    | term '/' factor
+    | factor
+    ;
+factor: 
+    '(' expression ')'
+    | '-' factor
+    | NOMBRE
+    ;
 %%
-int yyerror(void)
-{ fprintf(stderr, "erreur de syntaxe\n"); return 1;}
+
+#include <stdio.h>
+int yyerror(void) {
+    fprintf(stderr, "erreur de syntaxe\n"); 
+    return 1;
+}
