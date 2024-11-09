@@ -4,14 +4,16 @@
 
 %token NOMBRE
 %%
-expression:
-    expression '+' expression
-    | expression '-' expression
-    | expression '*' expression
-    | expression '/' expression
-    | '(' expression ')'
-    | NOMBRE
+
+expression: 
+    expression '+' expression {$$ = $1 + $3;}
+    | expression '-' expression {$$ = $1 - $3;}
+    | expression '*' expression {$$ = $1 * $3;}
+    | expression '/' expression {$$ = $1 / $3;}
+    | '(' expression ')' {$1;}
+    | NOMBRE {$1;}
     ;
+calcul: expression {printf("%d \n", $1 );}
 %%
 
 int yyerror(void)
