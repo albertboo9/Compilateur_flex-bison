@@ -22,9 +22,7 @@
 #include <stdlib.h>
 
 /* end standard C headers. */
-int yywrap() {
-  return 1;
-}
+
 /* flex integer type definitions */
 
 #ifndef FLEXINT_H
@@ -103,7 +101,9 @@ typedef unsigned int flex_uint32_t;
 #else
 #define yynoreturn
 #endif
-
+int yywrap(){
+	return 1;
+}
 /* Returned upon end-of-file. */
 #define YY_NULL 0
 
