@@ -1,8 +1,15 @@
 %{
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+extern int yylex();
+extern void yyerror(const char *msg);
+extern int yylineno;
 %}
 
 %token NOMBRE
+%left '+' '-'
+%left '*' '/';
 %%
 
 expression: 
@@ -13,7 +20,6 @@ expression:
     | '(' expression ')' {$1;}
     | NOMBRE {$1;}
     ;
-calcul: expression {printf("%d \n", $1 );}
 %%
 
 int yyerror(void)
