@@ -22,5 +22,4 @@ expression:
     ;
 %%
 
-int yyerror(void)
 { fprintf(stderr, "erreur de syntaxe\n"); return 1;}

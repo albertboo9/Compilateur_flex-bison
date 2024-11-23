@@ -70,8 +70,9 @@
 #line 1 "calc.y"
 
 #include <stdio.h>
+extern yyerror(char* msg)
 
-#line 75 "calc.tab.c"
+#line 76 "calc.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -496,7 +497,7 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    11,    11,    12,    13,    14,    15,    16
+       0,    13,    13,    14,    15,    16,    17,    18
 };
 #endif
 
@@ -1060,43 +1061,43 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* expression: expression '+' expression  */
-#line 11 "calc.y"
+#line 13 "calc.y"
                               {yyval = yyvsp[-2] + yyvsp[0];}
-#line 1066 "calc.tab.c"
+#line 1067 "calc.tab.c"
     break;
 
   case 3: /* expression: expression '-' expression  */
-#line 12 "calc.y"
+#line 14 "calc.y"
                                 {yyval = yyvsp[-2] - yyvsp[0];}
-#line 1072 "calc.tab.c"
+#line 1073 "calc.tab.c"
     break;
 
   case 4: /* expression: expression '*' expression  */
-#line 13 "calc.y"
+#line 15 "calc.y"
                                 {yyval = yyvsp[-2] * yyvsp[0];}
-#line 1078 "calc.tab.c"
+#line 1079 "calc.tab.c"
     break;
 
   case 5: /* expression: expression '/' expression  */
-#line 14 "calc.y"
+#line 16 "calc.y"
                                 {yyval = yyvsp[-2] / yyvsp[0];}
-#line 1084 "calc.tab.c"
+#line 1085 "calc.tab.c"
     break;
 
   case 6: /* expression: '(' expression ')'  */
-#line 15 "calc.y"
+#line 17 "calc.y"
                          {yyvsp[-2];}
-#line 1090 "calc.tab.c"
+#line 1091 "calc.tab.c"
     break;
 
   case 7: /* expression: NOMBRE  */
-#line 16 "calc.y"
+#line 18 "calc.y"
              {yyvsp[0];}
-#line 1096 "calc.tab.c"
+#line 1097 "calc.tab.c"
     break;
 
 
-#line 1100 "calc.tab.c"
+#line 1101 "calc.tab.c"
 
       default: break;
     }
@@ -1289,8 +1290,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 18 "calc.y"
+#line 20 "calc.y"
 
 
-int yyerror(void)
 { fprintf(stderr, "erreur de syntaxe\n"); return 1;}

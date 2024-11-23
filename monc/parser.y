@@ -14,16 +14,14 @@ extern int yylineno;
     int num;
 }
 
-%token DEMARRER ENTIER AFFICHER SI SINON POUR TEXTE NEWLINE ID NOMBRE
-
+%token DEMARRER ENTIER AFFICHER SI SINON POUR NEWLINE 
 %token <str> ID
 %token <num> NOMBRE
+%token <str> TEXTE
 
-%type <str> nom_variable
-%type <str> valeur
-%type <str> initialisation
-%type <str> incrementation
 
+%left '+' '-'
+%left '*' '/'
 
 %%
 
@@ -32,52 +30,33 @@ programme:
 ;
 
 instruction:
-    declaration ';' instruction
-    | affectation ';' instruction
-    | affichage ';' instruction
-    | condition instruction
-    | boucle instruction
+    ENTIER ID ';' { /* Ajouter la variable à la table des symboles */ }
+    | ID '=' expression ';' { /* Vérifier les types et affecter la valeur */ }
+    | AFFICHER '(' TEXTE ')' ';' { printf("%s\n", $3); }
+    | SI '(' condition ')' '{' instruction '}' SINON '{' instruction '}'
+    | POUR '(' ENTIER ID '=' NOMBRE ';' condition ';' ID '+' '+' ')' '{' instruction '}'
     | /* vide */
 ;
 
-declaration:
-    ENTIER nom_variable ';'
-;
-
-affectation:
-    nom_variable '=' valeur ';'
-;
-
-affichage:
-    AFFICHER '(' TEXTE ')' ';'
-;
-
 condition:
-    SI '(' condition ')' '{' instruction '}' SINON '{' instruction '}'
+    expression '<' expression
+    | expression '>' expression
+    
 ;
 
-boucle:
-    POUR '(' initialisation ';' condition ';' incrementation ')' '{' instruction '}'
+expression:
+    NOMBRE
+    | ID
+    | expression '+' expression
+    | expression '-' expression
+    | expression '*' expression
+    | expression '/' expression
+    | '(' expression ')'
 ;
-
-nom_variable:
-    ID { printf("Nom de variable : %s\n", $1); }
-;
-
-valeur:
-    NOMBRE { printf("Valeur : %d\n", $1); }
-    | ID { printf("Valeur : %s\n", $1); }
-;
-
-initialisation:
-    ENTIER ID '=' NOMBRE { printf("Initialisation : %s = %d\n", $2, $4); }
-;
-
-incrementation:
-    ID '+' '+' { printf("Incrementation : %s++\n", $1); }
-    | ID '-' '-' { printf("Incrementation : %s--\n", $1); }
-;
-
-
 
 %%
+
+int yyerror(const char *msg) {
+    fprintf(stderr, "Erreur à la ligne %d: %s\n", yylineno, msg);
+    return 0;
+}

@@ -14,9 +14,7 @@
 #endif
 
 /* First, we deal with  platform-specific or compiler-specific issues. */
-int yywrap(){
-	return 1;
-}
+
 /* begin standard C headers. */
 #include <stdio.h>
 #include <string.h>

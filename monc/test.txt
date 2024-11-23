@@ -1,1 +1,1 @@
-DEMARRER () { ENTIER x; };
+DEMARRER () { AFFICHER(YO); }

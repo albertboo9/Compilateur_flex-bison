@@ -60,10 +60,10 @@ extern int yydebug;
     SI = 261,                      /* SI  */
     SINON = 262,                   /* SINON  */
     POUR = 263,                    /* POUR  */
-    TEXTE = 264,                   /* TEXTE  */
-    NEWLINE = 265,                 /* NEWLINE  */
-    ID = 266,                      /* ID  */
-    NOMBRE = 267                   /* NOMBRE  */
+    NEWLINE = 264,                 /* NEWLINE  */
+    ID = 265,                      /* ID  */
+    NOMBRE = 266,                  /* NOMBRE  */
+    TEXTE = 267                    /* TEXTE  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -72,7 +72,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 12 "parser.y"
+#line 11 "parser.y"
 
     char* str;
     int num;
