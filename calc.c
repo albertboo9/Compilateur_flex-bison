@@ -1,10 +1,10 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include "calc.tab.h"
 
-void yyerror(const char *s) {
-    fprintf(stderr, "Erreur de syntaxe: %s\n", s);
-    exit(1);
-}
+extern int yyparse();
+
 int main() {
+    printf("Saisissez une expression arithmétique :\n");
     yyparse();
+    return 0;
 }

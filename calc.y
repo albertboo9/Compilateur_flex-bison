@@ -1,16 +1,14 @@
 %{
 #include <stdio.h>
-#include <math.h>
-
-#define YYSTYPE double
-
-extern int yyerror(const char *s);
-
+#include <stdlib.h>
 %}
 
 %token NOMBRE
-%left '+' '-'
-%left '*' '/'
+%left '-''+'
+%left '/' '*'
+
+
+%start calcul
 
 %%
 
@@ -20,13 +18,23 @@ expression:
     | expression '*' expression { $$ = $1 * $3; }
     | expression '/' expression {
         if ($3 == 0) {
-            yyerror("Division par zéro");
-    ²          $$ = 0; // Ou une autre valeur par défaut
-        } else {
-            $$ = $1 / $3;
+            fprintf(stderr, "Erreur : division par zéro\n");
+            exit(EXIT_FAILURE);
         }
-    } 
+        $$ = $1 / $3;
+    }
     | '(' expression ')' { $$ = $2; }
     | NOMBRE { $$ = $1; }
     ;
+
+calcul:
+    expression { printf("Résultat : %d\n", $1); }
+    ;
+
 %%
+
+int yyerror(const char *s)
+{
+    fprintf(stderr, "Erreur de syntaxe : %s\n", s);
+    return 1;
+}

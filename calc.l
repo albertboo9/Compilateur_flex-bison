@@ -1,15 +1,13 @@
 %{
+#include <stdio.h>
 #include "calc.tab.h"
 %}
-
 %%
-[0-9]+(\.[0-9]+)?  { yylval = atof(yytext); return NOMBRE; }
-"+"     { return '+'; }
-"-"     { return '-'; }
-"*"     { return '*'; }
-"/"     { return '/'; }
-"("     { return '('; }
-")"     { return ')'; }
-[ \t\n];
-.       { yyerror("Caractère inconnu"); }
+[0-9]+ {
+    yylval = atoi(yytext);
+    return NOMBRE;
+}
+[ \t] ; /* ignore les blancs et tabulations */
+\n return 0;
+. return yytext[0];
 %%
