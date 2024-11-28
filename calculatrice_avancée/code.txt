@@ -1,0 +1,15 @@
+x = 10;
+afficher(x);
+
+y = 20;
+si (x < y) {
+    afficher(y);
+} sinon {
+    afficher(x);
+}
+
+z = 0;
+tantque (z < 5) {
+    afficher(z);
+    z = z + 1;
+}
